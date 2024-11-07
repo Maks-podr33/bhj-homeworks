@@ -15,16 +15,16 @@ class Game {
     this.winsElement.textContent = 0;
     this.lossElement.textContent = 0;
   }
-
   registerEvents() {
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода символа вызываем this.success()
-      При неправильном вводе символа - this.fail();
-      DOM-элемент текущего символа находится в свойстве this.currentSymbol.
-     */
+    document.addEventListener('keydown', (event) => {
+      let symdolCurrent = this.currentSymbol.innerText.toLowerCase();
+      let symdolTake = event.key.toLowerCase();
+      if (symdolCurrent === symdolTake) {
+        this.success();
+      } else {
+        this.fail();
+      }
+    })
   }
 
   success() {
@@ -45,7 +45,7 @@ class Game {
   }
 
   fail() {
-    if (++this.lossElement.textContent === 5) {
+    if (++this.lossElement.textContent === 3) {
       alert('Вы проиграли!');
       this.reset();
     }
